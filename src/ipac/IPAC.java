@@ -14,8 +14,6 @@ public class IPAC {
      */
     
     public static void main(String[] args) {
-        Maximum_Host a = new Maximum_Host();
-        a.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Maximum_Host().setVisible(true);
