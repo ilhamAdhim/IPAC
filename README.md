@@ -1,6 +1,6 @@
-#IP Address Calculator
+# IP Address Calculator
 
-##Collaborators
+## Collaborators
 
 1. Arga Diaz Prawira Yudha
 2. Muhammad Ilham Adhim
