@@ -16,6 +16,7 @@ public class Class_Type extends javax.swing.JFrame {
      */
     public Class_Type() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -27,18 +28,61 @@ public class Class_Type extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        classTypePane = new javax.swing.JPanel();
+        classTypeLabel = new javax.swing.JLabel();
+        ipTextField = new javax.swing.JTextField();
+        generateButton = new javax.swing.JButton();
+        menuBar = new javax.swing.JMenuBar();
+        menuButton = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("IPAC - Beta Version 1.0.0");
+        setTitle("IPAC - Beta Version 1.0.0 (Class Type Finder)");
+        setResizable(false);
 
-        jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        classTypePane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jMenu1.setText("Calculator Type");
+        classTypeLabel.setText("Insert IP");
+
+        generateButton.setText("Generate");
+        generateButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        generateButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout classTypePaneLayout = new javax.swing.GroupLayout(classTypePane);
+        classTypePane.setLayout(classTypePaneLayout);
+        classTypePaneLayout.setHorizontalGroup(
+            classTypePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(classTypePaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(classTypePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(classTypePaneLayout.createSequentialGroup()
+                        .addComponent(classTypeLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(ipTextField))
+                .addContainerGap())
+            .addGroup(classTypePaneLayout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(generateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(122, Short.MAX_VALUE))
+        );
+        classTypePaneLayout.setVerticalGroup(
+            classTypePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(classTypePaneLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(classTypeLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ipTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
+        );
+
+        menuBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        menuButton.setText("Calculator Type");
+        menuButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuItem1.setText("Maximum Host");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -46,7 +90,7 @@ public class Class_Type extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menuButton.add(jMenuItem1);
 
         jMenuItem3.setText("Class Type");
         jMenuItem3.setEnabled(false);
@@ -55,7 +99,7 @@ public class Class_Type extends javax.swing.JFrame {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        menuButton.add(jMenuItem3);
 
         jMenuItem4.setText("DNS Validation");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -63,21 +107,25 @@ public class Class_Type extends javax.swing.JFrame {
                 jMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        menuButton.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu1);
+        menuBar.add(menuButton);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 322, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(classTypePane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 119, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(classTypePane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -86,7 +134,7 @@ public class Class_Type extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        Maximum_Host menu = new Maximum_Host();
+        MaxHostIP menu = new MaxHostIP();
         menu.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -104,10 +152,14 @@ public class Class_Type extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel classTypeLabel;
+    private javax.swing.JPanel classTypePane;
+    private javax.swing.JButton generateButton;
+    private javax.swing.JTextField ipTextField;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuButton;
     // End of variables declaration//GEN-END:variables
 }
