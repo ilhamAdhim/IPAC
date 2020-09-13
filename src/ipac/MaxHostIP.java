@@ -5,6 +5,9 @@
  */
 package ipac;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ASUS
@@ -32,10 +35,10 @@ public class MaxHostIP extends javax.swing.JFrame {
         inputPanel = new javax.swing.JPanel();
         inputLabelIP = new javax.swing.JLabel();
         inputLabelCIDR = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        cidrTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         generateButton = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        ipTextField = new javax.swing.JTextField();
         resultPanel = new javax.swing.JPanel();
         resultScrollPane = new javax.swing.JScrollPane();
         resultTextPane = new javax.swing.JTextPane();
@@ -81,11 +84,11 @@ public class MaxHostIP extends javax.swing.JFrame {
                             .addGroup(inputPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(2, 2, 2)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cidrTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(inputLabelIP)
                             .addComponent(inputLabelCIDR))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextField3))
+                    .addComponent(ipTextField))
                 .addContainerGap())
         );
         inputPanelLayout.setVerticalGroup(
@@ -94,12 +97,12 @@ public class MaxHostIP extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(inputLabelIP)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ipTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(inputLabelCIDR)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cidrTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(32, 32, 32)
                 .addComponent(generateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,20 +231,49 @@ public class MaxHostIP extends javax.swing.JFrame {
 
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
         // TODO add your handling code here:
+        String result="";
+        if(Operation.isIpFormat(ipTextField.getText()) && !ipTextField.getText().isEmpty() 
+                && !cidrTextField.getText().isEmpty()){
+            String ip=ipTextField.getText();
+            int cidr=Integer.parseInt(cidrTextField.getText());
+
+            result+="IP : "+ip+"\n\n";
+            result+="Total Host : "+Operation.hostNum(cidr)+"\n";
+            String[] ipHost=Operation.hostValue(ip, Operation.hostNum(cidr));
+            result+="Network ID : "+ipHost[0]+"\n";
+            result+="Broadcast ID : "+ipHost[ipHost.length-1]+"\n\n";
+            result+="Usable Host:\n";
+            for(int i=1;i<ipHost.length-1;i++){
+                result+=ipHost[i]+"\n";
+            }
+            result+="Subnet Mask: "+Operation.subnet(cidr);
+            if(cidr<24){
+                JOptionPane.showMessageDialog(
+                    new JFrame(), "This Calculator only support CIDR more than 23 ",
+                    "Error Warning", JOptionPane.WARNING_MESSAGE);
+            }else{
+                resultTextPane.setText(result);
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(
+                    new JFrame(), "Please enter the correct IP and CIDR format.",
+                    "Error Warning", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_generateButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem DNSValidMenu;
+    private javax.swing.JTextField cidrTextField;
     private javax.swing.JMenuItem classTypeMenu;
     private javax.swing.JButton generateButton;
     private javax.swing.JLabel inputLabelCIDR;
     private javax.swing.JLabel inputLabelIP;
     private javax.swing.JPanel inputPanel;
+    private javax.swing.JTextField ipTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuButton;
     private javax.swing.JLabel resultLabel;
