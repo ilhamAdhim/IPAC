@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ASUS
+ * @author Arga Diaz Prawira Yudha
  */
 public class MaxHostIP extends javax.swing.JFrame {
 
@@ -232,26 +232,26 @@ public class MaxHostIP extends javax.swing.JFrame {
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
         // TODO add your handling code here:
         String result="";
-        if(Operation.isIpFormat(ipTextField.getText()) && !ipTextField.getText().isEmpty() 
-                && !cidrTextField.getText().isEmpty()){
+        if( !ipTextField.getText().isEmpty() &&  !cidrTextField.getText().isEmpty()
+                && Operation.isIpFormat(ipTextField.getText())){
             String ip=ipTextField.getText();
             int cidr=Integer.parseInt(cidrTextField.getText());
 
-            result+="IP : "+ip+"\n\n";
-            result+="Total Host : "+Operation.hostNum(cidr)+"\n";
-            String[] ipHost=Operation.hostValue(ip, Operation.hostNum(cidr));
-            result+="Network ID : "+ipHost[0]+"\n";
-            result+="Broadcast ID : "+ipHost[ipHost.length-1]+"\n\n";
-            result+="Usable Host:\n";
-            for(int i=1;i<ipHost.length-1;i++){
-                result+=ipHost[i]+"\n";
-            }
-            result+="Subnet Mask: "+Operation.subnet(cidr);
             if(cidr<24){
                 JOptionPane.showMessageDialog(
                     new JFrame(), "This Calculator only support CIDR more than 23 ",
                     "Error Warning", JOptionPane.WARNING_MESSAGE);
             }else{
+                result+="IP : "+ip+"\n\n";
+                result+="Total Host : "+Operation.hostNum(cidr)+"\n";
+                String[] ipHost=Operation.hostValue(ip, Operation.hostNum(cidr));
+                result+="Network ID : "+ipHost[0]+"\n";
+                result+="Broadcast ID : "+ipHost[ipHost.length-1]+"\n\n";
+                result+="Usable Host:\n";
+                for(int i=1;i<ipHost.length-1;i++){
+                    result+=ipHost[i]+"\n";
+                }
+                result+="Subnet Mask: "+Operation.subnet(cidr);
                 resultTextPane.setText(result);
             }
             

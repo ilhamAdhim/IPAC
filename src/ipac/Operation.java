@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Operation {
+    
+    //check valid ip input
     static boolean isIpFormat(String ip){
         String[] ipBlocks=ip.split("\\.");
         for(String i:ipBlocks){
@@ -21,17 +23,20 @@ public class Operation {
                 }
             }
         }
-        if(ipBlocks.length>4 || ipBlocks.length<4)
-            return false;
-        return true;
+        for(String i:ipBlocks){
+            int ipCheck=Integer.parseInt(i);
+            if(ipCheck<0 || ipCheck>255)return false;
+        }
+        return !(ipBlocks.length>4 || ipBlocks.length<4);
     }
     
+    //check valid url input
     static boolean isURLFormat(String url){
         String[] urlBlocks=url.split("\\.");
-        return urlBlocks.length==3 || urlBlocks.length==2;
+        return urlBlocks.length<=6 && urlBlocks.length>1;
     }
     
-    
+    //split the ip of String to array of ip blocks
     static int [] ipSpliter(String ipString){
         int [] blocks=new int[4];
         String[] blocksString=ipString.split("\\.");
@@ -41,6 +46,7 @@ public class Operation {
         return blocks;
     }
     
+    //convert from ip blocks to binary ip blocks
     static String[] ipBinaryString(int[] ip){
         String[] ipBinary=new String[4];
         for(int i=0;i<ip.length;i++){
@@ -49,6 +55,7 @@ public class Operation {
         return ipBinary;
     }
     
+    //it calculate the subnet mask from the assigned CIDR
     static String subnet(int cidr){
         try{
         String binarySubnet="";
@@ -89,6 +96,7 @@ public class Operation {
         }
     }
     
+    //it return the total number of ip host based on CIDR value
     static int hostNum(int cidr){
         //total host per subnet
         int hostNum=0;
@@ -100,6 +108,7 @@ public class Operation {
         return 0;
     }
     
+    //it contain host ip address
     static String[] hostValue(String ip, int hostNum){
         int[] ipBlocks=ipSpliter(ip);
         String[] ipString=new String[hostNum];
@@ -129,9 +138,11 @@ public class Operation {
         return null;
     }
     
+    // Validate the URL connection, return InetAddress object
     static InetAddress validAddress(String url){
         try{
             InetAddress address = InetAddress.getByName(url);
+            //set the timeout of 5 seconds connecting
             if(address.isReachable(5000)){
                 return address;
             }
@@ -141,14 +152,5 @@ public class Operation {
             Logger.getLogger(Operation.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-    public static void main(String[] args) {
-//        int[] ipblocks=ipSpliter("2.123.123.123");
-//        System.out.println(ipBinaryString(ipblocks)[0]);
-//        System.out.println(isURLFormat("www"));
-//        System.out.println(hostNum(27)[0] +" "+ hostNum(29)[1]);
-//        System.out.println(hostValue(ipSpliter("192.168.1.1"), hostNum(27))[0]);
-//        System.out.println(hostValue(ipSpliter("192.168.1.1"), hostNum(27))[32]);
-        System.out.println(isIpFormat("192.x"));
     }
 }

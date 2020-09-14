@@ -5,9 +5,13 @@
  */
 package ipac;
 
+import java.net.InetAddress;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author ASUS
+ * @author Arga Diaz Prawira Yudha
  */
 public class DNS_Valid extends javax.swing.JFrame {
 
@@ -48,18 +52,21 @@ public class DNS_Valid extends javax.swing.JFrame {
 
         generateButton.setText("Generate");
         generateButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        generateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dnsValidPaneLayout = new javax.swing.GroupLayout(dnsValidPane);
         dnsValidPane.setLayout(dnsValidPaneLayout);
         dnsValidPaneLayout.setHorizontalGroup(
             dnsValidPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dnsValidPaneLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(dnsValidPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dnsTextField)
                     .addGroup(dnsValidPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(dnsTextField))
-                    .addGroup(dnsValidPaneLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(dnsLabel)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -139,6 +146,26 @@ public class DNS_Valid extends javax.swing.JFrame {
         Class_Type menu = new Class_Type();
         menu.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
+        // TODO add your handling code here:
+        if(!dnsTextField.getText().isEmpty() && Operation.isURLFormat(dnsTextField.getText())){
+            String url=dnsTextField.getText();
+            if(Operation.validAddress(url) != null){
+                InetAddress validAddress=Operation.validAddress(url);
+                String hostname = validAddress.getHostName();
+                String hostaddress = validAddress.getHostAddress();
+                
+                JOptionPane.showMessageDialog(new JFrame(), hostname+" using IP "+hostaddress, "Connection Success", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(new JFrame(), "Invalid domain connection or check your connection", 
+                        "Connection Failed", JOptionPane.ERROR_MESSAGE);
+            }
+                        
+        }else{
+            JOptionPane.showMessageDialog(new JFrame(), "Invalid URL Format!", "Error Warning", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_generateButtonActionPerformed
 
 
 

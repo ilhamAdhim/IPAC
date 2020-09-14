@@ -5,9 +5,12 @@
  */
 package ipac;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author ASUS
+ * @author Arga Diaz Prawira Yudha
  */
 public class Class_Type extends javax.swing.JFrame {
 
@@ -49,6 +52,11 @@ public class Class_Type extends javax.swing.JFrame {
         generateButton.setText("Generate");
         generateButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         generateButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        generateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout classTypePaneLayout = new javax.swing.GroupLayout(classTypePane);
         classTypePane.setLayout(classTypePaneLayout);
@@ -148,6 +156,27 @@ public class Class_Type extends javax.swing.JFrame {
         DNS_Valid menu = new DNS_Valid();
         menu.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
+        // TODO add your handling code here:
+        if( !ipTextField.getText().isEmpty() && Operation.isIpFormat(ipTextField.getText())){
+            String ipString=ipTextField.getText();
+            int [] ip=Operation.ipSpliter(ipString);
+            int firstByte=ip[0];
+            String message="";
+            if(firstByte>=0 && firstByte<=126) message = "IP "+ipString+" is "+" Class A";
+            else if(firstByte>=128 && firstByte<=191) message = "IP "+ipString+" is "+" Class B";
+            else if(firstByte>=192 && firstByte<=223) message = "IP "+ipString+" is "+" Class C";
+            else if(firstByte>=224 && firstByte<=247) message = "IP "+ipString+" is "+" Class D";
+            else message = "IP "+ipString+" is "+" Class E";
+            
+            JOptionPane.showMessageDialog(new JFrame(), message, "Notice", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(
+                new JFrame(), "Please enter the correct IP format.",
+                "Error Warning", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_generateButtonActionPerformed
 
 
 
