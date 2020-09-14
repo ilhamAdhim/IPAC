@@ -124,15 +124,16 @@ public class Operation {
             ipBlocks[i]=Integer.parseInt(ip.split("\\.")[i]);
         }
         int initByte=ipBlocks[0];
-        if(initByte>=0 && initByte<=127){
+        
+        if(initByte>=0 && initByte<128){
             return "Class A";
         }else if(initByte>=128 && initByte<=191){
             return "Class B";
         }else if(initByte>=192 && initByte<223){
             return "Class C";
-        }else if(initByte>=224 && initByte<247){
+        }else if(initByte>=224 && initByte<239){
             return "Class D";
-        }else if(initByte>=225 && initByte<255){
+        }else if(initByte>=240 && initByte<255){
             return "Class E";
         }
         return null;
