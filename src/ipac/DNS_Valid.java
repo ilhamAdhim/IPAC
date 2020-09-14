@@ -52,6 +52,7 @@ public class DNS_Valid extends javax.swing.JFrame {
 
         generateButton.setText("Generate");
         generateButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        generateButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         generateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 generateButtonActionPerformed(evt);
@@ -90,6 +91,7 @@ public class DNS_Valid extends javax.swing.JFrame {
         menuBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jMenu1.setText("Calculator Type");
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuItem1.setText("Maximum Host");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {

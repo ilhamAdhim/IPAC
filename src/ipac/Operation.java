@@ -132,7 +132,7 @@ public class Operation {
             return "Class C";
         }else if(initByte>=224 && initByte<247){
             return "Class D";
-        }else if(initByte>=225 && initByte<255){
+        }else if(initByte>=248 && initByte<255){
             return "Class E";
         }
         return null;
@@ -143,7 +143,7 @@ public class Operation {
         try{
             InetAddress address = InetAddress.getByName(url);
             //set the timeout of 5 seconds connecting
-            if(address.isReachable(5000)){
+            if(address.isReachable(10000)){
                 return address;
             }
         }catch(UnknownHostException e){
