@@ -162,13 +162,9 @@ public class Class_Type extends javax.swing.JFrame {
         if( !ipTextField.getText().isEmpty() && Operation.isIpFormat(ipTextField.getText())){
             String ipString=ipTextField.getText();
             int [] ip=Operation.ipSpliter(ipString);
-            int firstByte=ip[0];
             String message="";
-            if(firstByte>=0 && firstByte<=126) message = "IP "+ipString+" is "+" Class A";
-            else if(firstByte>=128 && firstByte<=191) message = "IP "+ipString+" is "+" Class B";
-            else if(firstByte>=192 && firstByte<=223) message = "IP "+ipString+" is "+" Class C";
-            else if(firstByte>=224 && firstByte<=247) message = "IP "+ipString+" is "+" Class D";
-            else message = "IP "+ipString+" is "+" Class E";
+            
+            message="IP "+ipString+" is "+Operation.classType(ipString);
             
             JOptionPane.showMessageDialog(new JFrame(), message, "Notice", JOptionPane.INFORMATION_MESSAGE);
         }else{

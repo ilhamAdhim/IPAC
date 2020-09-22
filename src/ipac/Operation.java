@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class Operation {
     
     //check valid ip input
-    static boolean isIpFormat(String ip){
+    public static boolean isIpFormat(String ip){
         String[] ipBlocks=ip.split("\\.");
         for(String i:ipBlocks){
             for(int j=0;j<i.length();j++){
@@ -31,13 +31,24 @@ public class Operation {
     }
     
     //check valid url input
-    static boolean isURLFormat(String url){
+    public static boolean isURLFormat(String url){
         String[] urlBlocks=url.split("\\.");
+        int countblocks=0;
+        for(String i:urlBlocks){
+            for(int j=0;j<i.length();j++){
+                char c = i.charAt(j);
+                if(countblocks==0)continue;
+                if(c>='0' && c<='9'){
+                    return false;
+                }
+            }
+            countblocks++;
+        }
         return urlBlocks.length<=6 && urlBlocks.length>1;
     }
     
     //split the ip of String to array of ip blocks
-    static int [] ipSpliter(String ipString){
+    public static int [] ipSpliter(String ipString){
         int [] blocks=new int[4];
         String[] blocksString=ipString.split("\\.");
         for(int i=0;i<blocksString.length;i++){
@@ -47,7 +58,7 @@ public class Operation {
     }
     
     //convert from ip blocks to binary ip blocks
-    static String[] ipBinaryString(int[] ip){
+    public static String[] ipBinaryString(int[] ip){
         String[] ipBinary=new String[4];
         for(int i=0;i<ip.length;i++){
             ipBinary[i]=Integer.toBinaryString(ip[i]);
@@ -56,7 +67,7 @@ public class Operation {
     }
     
     //it calculate the subnet mask from the assigned CIDR
-    static String subnet(int cidr){
+    public static String subnet(int cidr){
         try{
         String binarySubnet="";
         int count=0;
@@ -97,7 +108,7 @@ public class Operation {
     }
     
     //it return the total number of ip host based on CIDR value
-    static int hostNum(int cidr){
+    public static int hostNum(int cidr){
         //total host per subnet
         int hostNum=0;
         if(cidr>=0 && cidr<=32){
@@ -109,7 +120,7 @@ public class Operation {
     }
     
     //it contain host ip address
-    static String[] hostValue(String ip, int hostNum){
+    public static String[] hostValue(String ip, int hostNum){
         int[] ipBlocks=ipSpliter(ip);
         String[] ipString=new String[hostNum];
         for(int i=0;i<hostNum;i++){
@@ -118,7 +129,7 @@ public class Operation {
         return ipString;
     }
     
-    static String classType(String ip){
+    public static String classType(String ip){
         int[] ipBlocks=new int[4];
         for(int i=0;i<ipBlocks.length;i++){
             ipBlocks[i]=Integer.parseInt(ip.split("\\.")[i]);
@@ -139,7 +150,7 @@ public class Operation {
     }
     
     // Validate the URL connection, return InetAddress object
-    static InetAddress validAddress(String url){
+    public static InetAddress validAddress(String url){
         try{
             InetAddress address = InetAddress.getByName(url);
             //set the timeout of 5 seconds connecting
